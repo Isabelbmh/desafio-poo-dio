@@ -1,70 +1,58 @@
-package br.com.dio.desafio.dominio;
-
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bootcamp {
-    private String nome;
-    private String descricao;
-    private final LocalDate dataInicial = LocalDate.now();
-    private final LocalDate dataFinal = dataInicial.plusDays(45);
-    private Set<Dev> devsInscritos = new HashSet<>();
-    private Set<Conteudo> conteudos = new LinkedHashSet<>();
+    private String nombre;
+    private String descripcion;
+    private int duracion;
+    private List<Curso> cursos;
+    private List<Mentoria> mentorias;
+    private List<Dev> devs;
 
-
-    public String getNome() {
-        return nome;
+    public Bootcamp(String nombre, String descripcion, int duracion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.cursos = new ArrayList<>();
+        this.mentorias = new ArrayList<>();
+        this.devs = new ArrayList<>();
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void adicionarCurso(Curso curso) {
+        this.cursos.add(curso);
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void adicionarMentoria(Mentoria mentoria) {
+        this.mentorias.add(mentoria);
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void matricularDev(Dev dev) {
+        this.devs.add(dev);
     }
 
-    public LocalDate getDataInicial() {
-        return dataInicial;
+    public List<String> listarCursos() {
+        List<String> nombresCursos = new ArrayList<>();
+        for (Curso curso : cursos) {
+            nombresCursos.add(curso.getNombre());
+        }
+        return nombresCursos;
     }
 
-    public LocalDate getDataFinal() {
-        return dataFinal;
+    public List<String> listarMentorias() {
+        List<String> nombresMentorias = new ArrayList<>();
+        for (Mentoria mentoria : mentorias) {
+            nombresMentorias.add(mentoria.getNombre());
+        }
+        return nombresMentorias;
     }
 
-    public Set<Dev> getDevsInscritos() {
-        return devsInscritos;
+    public List<String> listarDevs() {
+        List<String> nombresDevs = new ArrayList<>();
+        for (Dev dev : devs) {
+            nombresDevs.add(dev.getNombre());
+        }
+        return nombresDevs;
     }
 
-    public void setDevsInscritos(Set<Dev> devsInscritos) {
-        this.devsInscritos = devsInscritos;
-    }
-
-    public Set<Conteudo> getConteudos() {
-        return conteudos;
-    }
-
-    public void setConteudos(Set<Conteudo> conteudos) {
-        this.conteudos = conteudos;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Bootcamp bootcamp = (Bootcamp) o;
-        return Objects.equals(nome, bootcamp.nome) && Objects.equals(descricao, bootcamp.descricao) && Objects.equals(dataInicial, bootcamp.dataInicial) && Objects.equals(dataFinal, bootcamp.dataFinal) && Objects.equals(devsInscritos, bootcamp.devsInscritos) && Objects.equals(conteudos, bootcamp.conteudos);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome, descricao, dataInicial, dataFinal, devsInscritos, conteudos);
-    }
+    // Getters y Setters
 }
